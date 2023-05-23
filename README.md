@@ -1,4 +1,5 @@
 # Guides and tutorials by 2N
 
 ## Tutorials
-- Deploy with Dokku
+- [🚢 Deploy with Dokku](./tutorials/dokku_deploy.md)
+
