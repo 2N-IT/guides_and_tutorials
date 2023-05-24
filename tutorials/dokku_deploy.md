@@ -143,7 +143,7 @@ dokku nginx:access-logs app_name -t
   
 - Rails logs
 ```bash
-  dokku logs app_name -t
+dokku logs app_name -t
 ```
   
 # Others
