@@ -28,4 +28,12 @@ Just like in code, documentations need some rules and practices to help readabil
 	
 ## Work culture
 
-For issues not related strictly  to coding and technical stuff remeber to check [2N Communication culture and principles](https://github.com/2N-IT/organization-and-culture) 
+For issues not related strictly  to coding and technical stuff remeber to check [2N Communication culture and principles](https://github.com/2N-IT/organization-and-culture)
+
+## Expand this document
+
+Fell free to create pull requests expanding any section here.
+
+a few useful links to help with formatting:
+
+[Syntax guide - Daring fireball](https://daringfireball.net/projects/markdown/syntax#header)
