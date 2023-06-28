@@ -19,5 +19,21 @@ Just like in code, documentations need some rules and practices to help readabil
 3. [envs](./code_environment.md)
     1. Local environment requirements
 	2. [🚢 Deploy with Dokku](./tutorials/dokku_deploy.md)
-4. Tools
-    1. [2n project generator](./generator.md)
+4. Api design
+	1. SOAP (Probably never a doc)
+	2. [Rest](./apis/rest.md)
+	3. GraphQL (TODO)
+5. Tools
+    1. [2n project generator](https://github.com/2N-IT/app-template)
+	
+## Work culture
+
+For issues not related strictly  to coding and technical stuff remeber to check [2N Communication culture and principles](https://github.com/2N-IT/organization-and-culture)
+
+## Expand this document
+
+Fell free to create pull requests expanding any section here.
+
+a few useful links to help with formatting:
+
+[Syntax guide - Daring fireball](https://daringfireball.net/projects/markdown/syntax#header)
