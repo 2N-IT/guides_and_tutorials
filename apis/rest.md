@@ -5,12 +5,48 @@
 ## Requests and responses
 
 TODO: Write a section about http protocol 101
+with: 
+- url safe character/encoding
+- url/uri/urn
+- anatomy of a http url
 
-### url
+### url anatomy
 
-todo
+This is not strictly rest related but it can help to establish some terminology.
 
-This is also often the most lackluster point of Rest. Being 100% focused on **Resource** crud is awkward in a **Process** oriented world where you can have different interactions with a resource.
+ex: https://example.com/path/to/resource?param1=value1&param2=value2#anchor
+
+Anatomy of the URL:
+- Scheme: `https://`
+- Domain: `example.com`
+- Path: `/path/to/resource`
+- Query Parameters: `?param1=value1&param2=value2`
+- Anchor: `#anchor`
+
+The entire URL can be referred to as an address.
+
+In this document about rest the 2 parts we care about the most are the `Path` and the `Query Parameters`
+
+### resource path
+
+The URLs path defines the resource we want to access. It differs from other API standards like  where you can have one address, and the content of the request body defines the response.
+
+The simplest path would be just the name of the resource we want to access ex: `/users` The standard is to use the prular form of a noun. This example path would refer to all the users. If we want a specific user we add it's id after the resource name in the path. !note! while technically using params would work resource ids should be in the path. 
+
+Example:
+GOOD: /users/1
+BAD: /users?user_id=1
+
+We can expand on such a path when we want to acces related resources. ex: `/users/1/orders` will be a list of the users orders.
+
+Notice that another approach would be `/orders?user_id=1` were we immediately access the end resource with added filters. It depend on the use case which form is the right one for the scenario ex if we want to avoid too long of an url with multiple nestings.
+
+Paths can also have prefixes ex it's common for a rest api path to start with a `/api` and potentially to also have a version ex `/v1`.
+
+we endup often with something resembing: `/api/v1/users/1/orders`
+
+**Note on security:**
+Using integers as ids is very convinient, easy to implement and to debug but also easy to exploit. Potential attakers could scrap more information than they should by just bumping the id by one nad checking the response. (even when permissions blok acces sometimes response times varie between processing requests for existing and unexisting data). A common solution to make this vector of attack harder is to use **uuid** as id key.
 
 ### http methods
 
@@ -26,6 +62,16 @@ The same url can have different effects based on the HTTP method used.
 **DELETE** - Deletes resource from the database
 
 Post vs Put - Some specification argue that put should be used for creation and post should be used for edits. This is a less common approach but worht knowing about.
+
+### But my feature need Actions/Processes
+
+This is also often the most lackluster point of Rest. Being 100% focused on **Resource** crud is awkward in a **Process** oriented world where you can have different interactions with a resource.
+
+For example we often have a `POST /sign_up` instead of a `POST /users` even if we technically are creating a user.
+
+Another example would be a `POST /users/1/ban` instead of a `PATCH /users/1` with a body: `{banned: true}`. It's because in real life scenario the backend dont only store resource data with some acces policies but do some processing like side efects in the form of email notifications.
+
+The fact that this kind of actions are taped to the base of a rest resource is also the reason why we have urls looking like `/users/1/ban` instead of `/users/ban/1/`. We try to keep the REST convention in path building as long as we can and diverge only in the last element.
 
 ## Status codes
 
