@@ -152,3 +152,4 @@ dokku logs app_name -t
 - [Persistent storage]()
 - [Deploy app with Github Actions]()
 - [Other plugings]()
+- [How to copy file from dokku container to local machine](./dokku/how_to_copy_file_from_dokku_container.md)
