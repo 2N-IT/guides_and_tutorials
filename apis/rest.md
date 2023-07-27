@@ -146,19 +146,51 @@ Since rest apis are stateless but we need to provide user based features authori
 
 Authentication is the process of receiving such a Token for example by providing login/password credentials.
 
+Token security is very important and multiple features on top of just issuing it can be added:
 
+  1- Tokens can be timed so they expire after a set duration. Usually to avoid breaking the user flow and asking him to resubmit his credentials during app use refresh mechanisms are added to generate a new token.
 
-### Custom Tokens
+  2-Possibility to revoke tokens. Something like the feature log me out on other devices for example. usually changing an accounts password should revoke old tokens.
+
+There are different ways to implement tokens:
 
 ### JWT
 
+This approach encode some identifing data in a token. On each request the token is deserialized since the issuing party have the decryption keys. ANy kind of data can be stored in such a token wich is bot good and potenially open to bad practices.
+
+Good points:
+   + A lot of ready tools
+   + relatively simple
+   + No database storage of tokens needed
+
+Bad Points:
+  + triky to revoke/blaklist tokens since they are not stored in db
+
 ### Oauth
 
-revoking tokens
+This kind of tokens are popular when you need to make some server to server communication on behalf of a user. Ex: sign-in with facebook were the customer give your app permission to retreive information from facebook on their behalf.
 
-refreshing tokens
+Good points:
+  + Standardised approach common in different sites (facebook/shopify ...)
 
-tldr: when to use which kind of auth strategy?
+Bad points:
+  + Designed for specific cases you probably wont have it as the single token type in an app
+  + Can be a bit complicated to start depending on added security measures/configs
+
+### Custom Tokens
+
+A catch all category. Most of the apps will have a custom way to generate tokens and will differ in what additional features the tokens will handle: timed or eternal, revokable or not, how are they stored ...
+
+Good points:
+  + you can have any feature you want
+
+Bad points:
+  + you need to implement any feature you want from scratch
+  + lack of standarization
+  
+### Auth summary
+
+when to use which kind of auth strategy?
 - If your auth lib offer some kind of ready gem use it if possible. Usually it will be some kind of custom token ex [devise-api](https://github.com/nejdetkadir/devise-api)
 - If you need to make somthing without storing backend data use JWT tokens
 - If the communication is server-server but on behalf of a user use Oauth
@@ -195,5 +227,5 @@ Additional notes:
 
 # JSON::API
 
-- [JSON::API design documentation](todo)
-- [JSON::API ruby/rails gem](todo)
+- [JSON::API design documentation](official documentation)
+- [JSON::API ruby/rails gem](Rails gem)
