@@ -172,6 +172,7 @@ This kind of tokens are popular when you need to make some server to server comm
 
 Good points:
   + Standardised approach common in different sites (facebook/shopify ...)
+  + Possibility of selection permissions scope to give acces only to a subset of endpoints
 
 Bad points:
   + Designed for specific cases you probably wont have it as the single token type in an app
@@ -187,7 +188,13 @@ Good points:
 Bad points:
   + you need to implement any feature you want from scratch
   + lack of standarization
-  
+
+### Security reminders
+
+When logging requests try to make sure security is not compromised by logging tokens in insecure text logs.
+
+When using tkens of external apps avoid adding them to the code repository as plaintext. Even if the repo is private.
+
 ### Auth summary
 
 when to use which kind of auth strategy?
