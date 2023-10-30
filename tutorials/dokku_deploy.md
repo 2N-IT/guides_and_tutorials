@@ -147,9 +147,9 @@ dokku logs app_name -t
 ```
   
 # Others
-- [Adding new developer to access dokku]()
-- [Changing Nginx limit for uploading files]()
-- [Persistent storage]()
-- [Deploy app with Github Actions]()
+- [Adding new developer to access dokku](./dokku/new_dokku_dev.md)
+- [Changing Nginx limit for uploading files](./dokku/change_nginx_limit.md)
+- [Persistent storage](./dokku/persistent_storage.md)
+- [Deploy app with Github Actions](./dokku/deploy_with_github_actions.md)
 - [Other plugings]()
 - [How to copy file from dokku container to local machine](./dokku/how_to_copy_file_from_dokku_container.md)
