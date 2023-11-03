@@ -603,3 +603,8 @@ This FormObject is suited to work on a very particular, multi-stage form, that d
 It is more extendable but remains simple (in the BaseFormObject), giving only a general directions about implementation of every form object.
 
 Those kind of form objects are the **easiest to test**, since they are the most independent ones, and it is best to be created with TDD.
+
+### 2N default
+
+Since there was barely any discussion about the above approaches, we decided to go with the first one, as it is the most popular and the most consistent with the rest of the codebase.
+Treat this as default until people decide to change it or add their own thoughts to the topic. For now only two people voiced their opinions on FormObjects based on the above, so it was not enough for me to propose an example that would put us on some direction.
