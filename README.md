@@ -15,7 +15,7 @@ Just like in code, documentations need some rules and practices to help readabil
     3. Factories (TODO)
 2. [Code readability and Patterns](./code.md)
     1. Service Objects
-    2. Form Objects (TODO)
+    2. Form Objects
 3. [envs](./code_environment.md)
     1. Local environment requirements
 	2. [🚢 Deploy with Dokku](./tutorials/dokku_deploy.md)
