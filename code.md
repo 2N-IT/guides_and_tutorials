@@ -1,3 +1,5 @@
+Our patterns are collected into a gem: https://rubygems.org/gems/2n-patterns
+
 ## Service Objects
 
 Probably **Operation/Command/Action** or even **Process** would be a better name, but **Service Object** is most common name of this pattern/concept in Rails community, so lets stick to it.
