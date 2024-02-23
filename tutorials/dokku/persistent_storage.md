@@ -24,5 +24,5 @@ Your uploaded files won't disappear after deploy.
 
 ### DockerFile Warning!
 
-the default /app used in all examples may now work if you use dockerfile
+the default /app used in all examples may not work if you use dockerfile
 instead of starting the path with /app use the folder specified in WORKDIR
