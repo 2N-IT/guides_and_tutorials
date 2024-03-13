@@ -18,6 +18,6 @@ Just like in code, documentations need some rules and practices to help readabil
     2. Form Objects
 3. [envs](./code_environment.md)
     1. Local environment requirements
-	2. [🚢 Deploy with Dokku](./tutorials/dokku_deploy.md)
+	2. [🚢 Deploy with Dokku](./tutorials/dokku/dokku_deploy.md)
 4. Tools
     1. [2n project generator](./generator.md)
