@@ -145,6 +145,17 @@ dokku nginx:access-logs app_name -t
 ```bash
 dokku logs app_name -t
 ```
+
+- check if autorenew for letsencrypt is correctly configured
+
+```bash
+sudo -u dokku crontab -l
+```
+  * expected result:
+  ```
+    @daily /var/lib/dokku/plugins/available/letsencrypt/cron-job
+  ```
+
   
 # Others
 - [Adding new developer to access dokku](./dokku/new_dokku_dev.md)
