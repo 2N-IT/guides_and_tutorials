@@ -1,20 +1,33 @@
 
-# DOKKU - cron job to export postgres
+# DOKKU - cron job to export postgres database:
 
-## 1. Prepare the script file:
+## First of all, we need to install the `dokku postgres` plugin if we don't already have it:
+```sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres```
 
-- create a new .sh file
+## 1. Create a directory for DB backups:
+NOTE: remember that we do this using the `psbk` application as an example - in your own project you need to adjust the folder path accordingly
+
+
+```mkdir /home/psbk/db_backups```
+
+## 2. Prepare the script file:
+
+- create a new shell script file in project directory (in this case e.g. `/home/psbk/db_backup_script.sh`)
 
 ```
-# Define your database name e.g. bellow
-DB_NAME="psbk-pre-prod"
-# Directory to store the exports e.g. bellow
-EXPORT_DIR="/home/abramowicza/exports"
+# Assign the name of the database you want to back up (you can check the list of Postgres databases with the command "dokku postgres:list"):
+DB_NAME="psbk-staging-db"
+
+# Define a directory to store exported DB dumpes (you need to create such a directory- step 2):
+EXPORT_DIR="/home/psbk/db_backups"
+
 # Export the database
 EXPORT_FILE="$EXPORT_DIR/$DB_NAME-$(date +\%Y\%m\%d\%H\%M\%S).dump"
 dokku postgres:export "$DB_NAME" > "$EXPORT_FILE"
+
 # Get the number of files in the export directory
 num_files=$(find "$EXPORT_DIR" -maxdepth 1 -type f | wc -l)
+
 # If there are more than three exports, remove the oldest ones
 if [ "$num_files" -gt 3 ]; then
   files_to_remove=$(find "$EXPORT_DIR" -maxdepth 1 -type f | sort | head -n -3)
@@ -28,11 +41,7 @@ fi done
 fi
 ```
 
-- REMEMBER!!! you need to customise DB_NAME and EXPORT_DIR
-
-## 2. Create the bakup directory:
-
-```mkdir /home/abramowicza/exports```
+- REMEMBER!!! you need to set DB_NAME and EXPORT_DIR according to the context of your application
 
 ## 3. Setup the CRON job:
 
@@ -43,7 +52,7 @@ fi
 no crontab for psbkstg
 ```
 
-- add the script fromt step 1 to the config 
+- add the script fromt step 2 to the config 
 
 ```
 psbkstg@vps-405b6199:~$ crontab -e
@@ -59,18 +68,17 @@ Select an editor.  To change later, run 'select-editor'.
 Choose 1-5 [1]: 1
 ```
 
-```path_to_script
- /home/abramowicza/export_db.sh
- 0 0 * * * path_to_script
+```
+ 0 0 * * * /home/psbk/db_backup_script.sh
 ```
 
-- You should see something liek this as a result:
+- You should see something like this as a result:
 
 ``` crontab: installing new crontab ``` 
 
 - Check the correct configuration is set
 
-``````
+```
 psbkstg@vps-405b6199:~$ crontab -l
 # Edit this file to introduce tasks to be run by cron.
 #
@@ -95,5 +103,27 @@ psbkstg@vps-405b6199:~$ crontab -l
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-0 0 * * * /home/psbkstg/export_db.sh
+0 0 * * * /home/psbk/db_backup_script.sh
 ```
+
+
+# DOKKU - restore dumped DB backup:
+## 1. Go to the directory with dumped databases and check what database versions are possible to restore:
+```
+$ cd ~/backups/
+$ ls
+psbk-staging-db-20240603000002.dump  psbk-staging-db-20240604000001.dump  psbk-staging-db-20240605135354.dump
+```
+NOTE: please note that we only have 3 backups here - this is determined by the script we defined above
+
+## 2. Restore the database from a backup file:
+Command pattern:
+```
+dokku postgres:import dokku_db_service_name < path_to_dumped_file/file
+```
+
+So in our case it should look like this:
+```
+dokku postgres:import psbk-staging-db < ~/db_backups/psbk-staging-db-20240604000001.dump
+```
+And that's it
