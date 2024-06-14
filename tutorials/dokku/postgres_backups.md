@@ -1,6 +1,9 @@
 
 # DOKKU - cron job to export postgres database:
 
+## First of all, we need to install the `dokku postgres` plugin if we don't already have it:
+```sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres```
+
 ## 1. Create a directory for DB backups:
 NOTE: remember that we do this using the `psbk` application as an example - in your own project you need to adjust the folder path accordingly
 
