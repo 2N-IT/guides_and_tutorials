@@ -117,4 +117,3 @@ the parameters follow the keys
 `# TYPE  DATABASE        USER            ADDRESS                METHOD`
 
 Of course if possible it's better to give as restrictive permissions as possible like limiting accessible databases and users
-
