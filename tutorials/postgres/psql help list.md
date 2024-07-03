@@ -2,7 +2,7 @@
 
 ```sql
 #reload postgres
-sudo sudo systemctl reload postgresql
+sudo systemctl reload postgresql
 
 #another way incase you dont have permissions to systemctl
 sudo /etc/init.d/postgresql restart
