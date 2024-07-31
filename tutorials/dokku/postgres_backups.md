@@ -122,8 +122,40 @@ Command pattern:
 dokku postgres:import dokku_db_service_name < path_to_dumped_file/file
 ```
 
+In case you dont recall the dokku_db_service_name
+
+```
+dokku postgres:list
+```
+
 So in our case it should look like this:
 ```
 dokku postgres:import psbk-staging-db < ~/db_backups/psbk-staging-db-20240604000001.dump
 ```
 And that's it
+
+## User permissions
+
+It's best to not have the user running the script be a root user.
+
+lets create one just for this use
+
+```
+sudo adduser athletex-dev
+visudo /etc/sudoers
+```
+
+to the sudoers file add
+
+```
+%athletex-dev ALL=(ALL:ALL) NOPASSWD:SETENV: /usr/bin/dokku
+```
+
+now you can connect to your new user to work
+
+```
+sudo su athletex-dev
+cd ~/
+```
+
+!Warning! If you fail to configure the permissions to dokku properly you will not have a loud crontab error you will just be rotating empty backup files daily.
